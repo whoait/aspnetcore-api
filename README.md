@@ -148,3 +148,19 @@ END
     }
 }
 ```
+
+# Test on Azure (within Postman tool):
+
+- Endpoint url: https://dynamicaspnetcoreapi.azurewebsites.net/api/v1/dynamic/query-sql
+- Method: POST
+- Content-Type: application/json
+- Body:
+
+```
+{
+    "sqlCommand": "[p_API_GetProducts]",
+    "parameters": {
+    	"color": "Black"
+    }
+}
+```
