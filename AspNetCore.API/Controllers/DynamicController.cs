@@ -18,8 +18,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace AspNetCore.API.Controllers
 {
-    [ApiVersion("1.0")]    
+    [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class DynamicController : ControllerBase
     {
@@ -45,9 +46,29 @@ namespace AspNetCore.API.Controllers
         }
 
         // ------------------------------------------------------------------------------------------------------------
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="body">
+        /// Dynamic value
+        /// </param>
+        /// <returns>JSON</returns>
+        /// <response code="200">OK</response>        
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///     {
+        ///         "sqlCommand": "[p_API_GetProducts]",
+        ///         "parameters": {
+        ///             "color": "Black"
+        ///         }
+        ///     }
+        ///
+        /// </remarks>
         [HttpPost("query-sql")]
         [Produces("application/json")]
-        [ProducesResponseType(200, Type = typeof(JsonResult))]
+        [ProducesResponseType(200)]
         [AllowAnonymous]
         [EnableCors("Allow-All")]
         public async Task<IActionResult> QuerySql([FromBody] dynamic body)
@@ -90,7 +111,7 @@ namespace AspNetCore.API.Controllers
 
                 return new BadRequestObjectResult(response);
             }
-        }      
+        }
     }
 }
 

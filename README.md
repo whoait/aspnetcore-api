@@ -7,6 +7,7 @@
 - Microsoft.AspNetCore.Mvc.Versioning
 - Dapper
 - Newtonsoft.Json
+- Swashbuckle.AspNetCore
 
 # Startup:
 
@@ -29,7 +30,56 @@ public void ConfigureServices(IServiceCollection services)
   // API Versioning
   // Nuget: Microsoft.AspNetCore.Mvc.Versioning
   services.AddApiVersioning();
+
+   // Register the Swagger generator, defining 1 or more Swagger documents
+    services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new Info
+        {
+            Version = "v1",
+            Title = "ToDo API",
+            Description = "A simple example ASP.NET Core Web API",
+            TermsOfService = "None",
+            Contact = new Contact
+            {
+                Name = "Tung Ngo",
+                Email = "tungnt@softech.vn",
+                Url = "https://softech.vn"
+            },
+            License = new License
+            {
+                Name = "Use under LICX",
+                Url = "https://example.com/license"
+            }
+        });
+
+        //Set the comments path for the Swagger JSON and UI.
+
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        c.IncludeXmlComments(xmlPath);
+    });
 }
+
+// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+
+    // Swagger
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ASP.NET Core API");
+        //c.RoutePrefix = string.Empty;
+    });
+
+    app.UseMvc();
+}
+
 ```
 
 # Controller:
@@ -37,6 +87,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
+[Produces("application/json")]
 [ApiController]
 public class DynamicController : ControllerBase
 {
@@ -62,9 +113,29 @@ public class DynamicController : ControllerBase
     }
 
     // ------------------------------------------------------------------------------------------------------------
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="body">
+    /// Dynamic value
+    /// </param>
+    /// <returns>JSON</returns>
+    /// <response code="200">OK</response>
+    /// <remarks>
+    /// Sample request:
+    ///
+    ///     POST
+    ///     {
+    ///         "sqlCommand": "[p_API_GetProducts]",
+    ///         "parameters": {
+    ///             "color": "Black"
+    ///         }
+    ///     }
+    ///
+    /// </remarks>
     [HttpPost("query-sql")]
     [Produces("application/json")]
-    [ProducesResponseType(200, Type = typeof(JsonResult))]
+    [ProducesResponseType(200)]
     [AllowAnonymous]
     [EnableCors("Allow-All")]
     public async Task<IActionResult> QuerySql([FromBody] dynamic body)
@@ -148,6 +219,8 @@ END
     }
 }
 ```
+
+# Swagger: http://localhost:58638/swagger/index.html
 
 # Test on Azure (within Postman tool):
 
