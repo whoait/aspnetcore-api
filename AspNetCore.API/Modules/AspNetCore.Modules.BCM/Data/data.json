@@ -1,0 +1,5 @@
+{
+  "safeStoredProcedures": [
+    "p_API_REMS_Users_Login"
+  ]
+}
