@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.API", "AspNetCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Modules.BCM", "AspNetCore.API\Modules\AspNetCore.Modules.BCM\AspNetCore.Modules.BCM.csproj", "{6FEA0395-B187-443D-BE6C-8142DC7C2FFA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Modules.API", "AspNetCore.API\Modules\AspNetCore.Modules.API\AspNetCore.Modules.API.csproj", "{3446441A-2A37-49F9-8E26-40A3093FF018}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoogleTranslateAPI", "AspNetCore.API\Modules\GoogleTranslateAPI\GoogleTranslateAPI.csproj", "{59B26BA9-F2D8-47E6-8F04-6EC9BBA8E970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6FEA0395-B187-443D-BE6C-8142DC7C2FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEA0395-B187-443D-BE6C-8142DC7C2FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEA0395-B187-443D-BE6C-8142DC7C2FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3446441A-2A37-49F9-8E26-40A3093FF018}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3446441A-2A37-49F9-8E26-40A3093FF018}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3446441A-2A37-49F9-8E26-40A3093FF018}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3446441A-2A37-49F9-8E26-40A3093FF018}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59B26BA9-F2D8-47E6-8F04-6EC9BBA8E970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B26BA9-F2D8-47E6-8F04-6EC9BBA8E970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B26BA9-F2D8-47E6-8F04-6EC9BBA8E970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B26BA9-F2D8-47E6-8F04-6EC9BBA8E970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

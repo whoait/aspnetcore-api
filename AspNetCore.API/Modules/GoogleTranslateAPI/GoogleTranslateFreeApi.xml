@@ -1,0 +1,718 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GoogleTranslateAPI</name>
+    </assembly>
+    <members>
+        <member name="T:GoogleTranslateAPI.GoogleKeyTokenGenerator">
+            <summary>
+            GoogleTranslate token generator
+            </summary>
+        </member>
+        <member name="T:GoogleTranslateAPI.GoogleKeyTokenGenerator.ExternalKey">
+            <summary>
+            GoogleTranslate token
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleKeyTokenGenerator.ExternalKey.Time">
+            <summary>
+            Total hours
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleKeyTokenGenerator.ExternalKey.Value">
+            <summary>
+            Token value
+            </summary>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleKeyTokenGenerator.ExternalKey.#ctor(System.Int64,System.Int64)">
+            <param name="time">Unix-formatted total hours</param>
+            <param name="value">Token value</param>
+        </member>
+        <member name="F:GoogleTranslateAPI.GoogleKeyTokenGenerator.CurrentExternalKey">
+            <summary>
+            Using external key 
+            </summary>
+        </member>
+        <member name="F:GoogleTranslateAPI.GoogleKeyTokenGenerator.Address">
+            <summary>
+            Address for sending requests
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleKeyTokenGenerator.UnixTotalHours">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleKeyTokenGenerator.IsExternalKeyObsolete">
+            <summary>
+            True, if the current key cannot be used for a token generate
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleKeyTokenGenerator.Proxy">
+            <summary>
+            The proxy server that is used to send requests
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleKeyTokenGenerator.TimeOut">
+            <summary>
+            Requests timeout
+            </summary>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleKeyTokenGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:GoogleTranslateAPI.GoogleKeyTokenGenerator"/> class
+            </summary>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleKeyTokenGenerator.GenerateAsync(System.String)">
+            <summary>
+            <p>Generate the token for a given string</p>
+            </summary>
+            <param name="source">The string to receive the token</param>
+            <returns>Token for the current string</returns>
+            <exception cref="T:System.NotSupportedException">The method is no longer valid, or something went wrong</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">Http exception</exception>
+            <exception cref="T:GoogleTranslateAPI.GoogleTranslateIPBannedException"></exception>
+        </member>
+        <member name="T:GoogleTranslateAPI.GoogleTranslator">
+            <summary>
+            Represent a class for translate the text using <see href="http://translate.google.com"/>
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleTranslator.TimeOut">
+            <summary>
+            Requests timeout
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleTranslator.Proxy">
+            <summary>
+            Requests proxy
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.GoogleTranslator.LanguagesSupported">
+            <summary>
+            An Array of supported languages by google translate
+            </summary>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.GetLanguageByName(System.String)">
+            <param name="language">Full name of the required language</param>
+            <example>GoogleTranslator.GetLanguageByName("English")</example>
+            <returns>Language object from the LanguagesSupported array</returns>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.GetLanguageByISO(System.String)">
+            <param name="iso">ISO of the required language</param>
+            <example>GoogleTranslator.GetLanguageByISO("en")</example>
+            <returns>Language object from the LanguagesSupported array</returns>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.IsLanguageSupported(GoogleTranslateAPI.Language)">
+            <summary>
+            Check is available language to translate
+            </summary>
+            <param name="language">Checked <see cref="T:GoogleTranslateAPI.Language"/> </param>
+            <returns>Is it available language or not</returns>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.#ctor(System.String)">
+            <param name="domain">A Domain name which will be used to execute requests</param>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.TranslateAsync(System.String,GoogleTranslateAPI.Language,GoogleTranslateAPI.Language)">
+            <summary>
+            <p>
+            Async text translation from language to language. Include full information about the translation.
+            </p>
+            </summary>
+            <param name="originalText">Text to translate</param>
+            <param name="fromLanguage">Source language</param>
+            <param name="toLanguage">Target language</param>
+            <exception cref="T:GoogleTranslateAPI.LanguageIsNotSupportedException">Language is not supported</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when target language is auto</exception>
+            <exception cref="T:GoogleTranslateAPI.GoogleTranslateIPBannedException">Thrown when the IP used for requests is banned </exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">Thrown when getting the HTTP exception</exception>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.TranslateAsync(GoogleTranslateAPI.ITranslatable)">
+            <summary>
+            <p>
+            Async text translation from language to language. Include full information about the translation.
+            </p>
+            </summary>
+            <param name="item">The object that implements the interface ITranslatable</param>
+            <exception cref="T:GoogleTranslateAPI.LanguageIsNotSupportedException">Language is not supported</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when target language is auto</exception>
+            <exception cref="T:GoogleTranslateAPI.GoogleTranslateIPBannedException">Thrown when the IP used for requests is banned </exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">Thrown when getting the HTTP exception</exception>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.TranslateLiteAsync(System.String,GoogleTranslateAPI.Language,GoogleTranslateAPI.Language)">
+            <summary>
+            <p>
+            Async text translation from language to language. 
+            In contrast to the TranslateAsync doesn't include additional information such as ExtraTranslation and Definition.
+            </p>
+            </summary>
+            <param name="originalText">Text to translate</param>
+            <param name="fromLanguage">Source language</param>
+            <param name="toLanguage">Target language</param>
+            <exception cref="T:GoogleTranslateAPI.LanguageIsNotSupportedException">Language is not supported</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when target language is auto</exception>
+            <exception cref="T:GoogleTranslateAPI.GoogleTranslateIPBannedException">Thrown when the IP used for requests is banned </exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">Thrown when getting the HTTP exception</exception>
+        </member>
+        <member name="M:GoogleTranslateAPI.GoogleTranslator.TranslateLiteAsync(GoogleTranslateAPI.ITranslatable)">
+            <summary>
+            <p>
+            Async text translation from language to language. 
+            In contrast to the TranslateAsync doesn't include additional information such as ExtraTranslation and Definition.
+            </p>
+            </summary>
+            <param name="item">The object that implements the interface ITranslatable</param>
+            <exception cref="T:GoogleTranslateAPI.LanguageIsNotSupportedException">Language is not supported</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when target language is auto</exception>
+            <exception cref="T:GoogleTranslateAPI.GoogleTranslateIPBannedException">Thrown when the IP used for requests is banned</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">Thrown when getting the HTTP exception</exception>
+        </member>
+        <member name="T:GoogleTranslateAPI.Language">
+            <summary>
+            Represents language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.FullName">
+            <summary>
+            Language name ( doesn't affect anything )
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.ISO639">
+            <summary>
+            ISO639  table: <see href="http://stnsoft.com/Muxman/mxp/ISO_639.html"/>
+            </summary>
+        </member>
+        <member name="M:GoogleTranslateAPI.Language.#ctor(System.String,System.String)">
+            <summary>
+            Creates new Language
+            </summary>
+            <param name="fullName">Language full name (set what do you want) </param>
+            <param name="iso639">ISO639 value</param>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Auto">
+            <summary>
+            Auto Detection Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Afrikaans">
+            <summary>
+            Afrikaans Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Albanian">
+            <summary>
+            Albanian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Amharic">
+            <summary>
+            Amharic Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Arabic">
+            <summary>
+            Arabic Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Armenian">
+            <summary>
+            Armenian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Azerbaijani">
+            <summary>
+            Azerbaijani Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Basque">
+            <summary>
+            Basque Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Belarusian">
+            <summary>
+            Belarusian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Bengali">
+            <summary>
+            Bengali Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Bosnian">
+            <summary>
+            Bosnian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Bulgarian">
+            <summary>
+            Bulgarian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Catalan">
+            <summary>
+            Catalan Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Cebuano">
+            <summary>
+            Cebuano Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Chichewa">
+            <summary>
+            Chichewa Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.ChineseSimplified">
+            <summary>
+            Chinese Simplified Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.ChineseTraditional">
+            <summary>
+            Chinese Traditional Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Corsican">
+            <summary>
+            Corsican Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Croatian">
+            <summary>
+            Croatian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Czech">
+            <summary>
+            Czech Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Danish">
+            <summary>
+            Danish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Dutch">
+            <summary>
+            Dutch Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.English">
+            <summary>
+            English Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Esperanto">
+            <summary>
+            Esperanto Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Estonian">
+            <summary>
+            Estonian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Filipino">
+            <summary>
+            Filipino Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Finnish">
+            <summary>
+            Finnish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.French">
+            <summary>
+            French Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Frisian">
+            <summary>
+            Frisian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Galician">
+            <summary>
+            Galician Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Georgian">
+            <summary>
+            Georgian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.German">
+            <summary>
+            German Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Greek">
+            <summary>
+            Greek Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Gujarati">
+            <summary>
+            Gujarati Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.HaitianCreole">
+            <summary>
+            Haitian Creole Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Hausa">
+            <summary>
+            Hausa Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Hawaiian">
+            <summary>
+            Hawaiian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Hebrew">
+            <summary>
+            Hebrew Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Hindi">
+            <summary>
+            Hindi Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Hmong">
+            <summary>
+            Hmong Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Hungarian">
+            <summary>
+            Hungarian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Icelandic">
+            <summary>
+            Icelandic Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Igbo">
+            <summary>
+            Igbo Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Indonesian">
+            <summary>
+            Indonesian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Irish">
+            <summary>
+            Irish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Italian">
+            <summary>
+            Italian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Japanese">
+            <summary>
+            Japanese Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Javanese">
+            <summary>
+            Javanese Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Kannada">
+            <summary>
+            Kannada Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Kazakh">
+            <summary>
+            Kazakh Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Khmer">
+            <summary>
+            Khmer Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Korean">
+            <summary>
+            Korean Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.KurdishKurmanji">
+            <summary>
+            Kurdish (Kurmanji) Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Kyrgyz">
+            <summary>
+            Kyrgyz Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Lao">
+            <summary>
+            Lao Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Latin">
+            <summary>
+            Latin Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Latvian">
+            <summary>
+            Latvian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Lithuanian">
+            <summary>
+            Lithuanian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Luxembourgish">
+            <summary>
+            Luxembourgish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Macedonian">
+            <summary>
+            Macedonian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Malagasy">
+            <summary>
+            Malagasy Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Malay">
+            <summary>
+            Malay Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Malayalam">
+            <summary>
+            Malayalam Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Maltese">
+            <summary>
+            Maltese Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Maori">
+            <summary>
+            Maori Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Marathi">
+            <summary>
+            Marathi Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Mongolian">
+            <summary>
+            Mongolian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.MyanmarBurmese">
+            <summary>
+            Myanmar (Burmese) Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Nepali">
+            <summary>
+            Nepali Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Norwegian">
+            <summary>
+            Norwegian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Pashto">
+            <summary>
+            Pashto Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Persian">
+            <summary>
+            Persian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Polish">
+            <summary>
+            Polish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Portuguese">
+            <summary>
+            Portuguese Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Punjabi">
+            <summary>
+            Punjabi Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Romanian">
+            <summary>
+            Romanian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Russian">
+            <summary>
+            Russian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Samoan">
+            <summary>
+            Samoan Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.ScotsGaelic">
+            <summary>
+            Scots Gaelic Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Serbian">
+            <summary>
+            Serbian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Sesotho">
+            <summary>
+            Sesotho Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Shona">
+            <summary>
+            Shona Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Sindhi">
+            <summary>
+            Sindhi Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Sinhala">
+            <summary>
+            Sinhala Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Slovak">
+            <summary>
+            Slovak Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Slovenian">
+            <summary>
+            Slovenian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Somali">
+            <summary>
+            Somali Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Spanish">
+            <summary>
+            Spanish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Sundanese">
+            <summary>
+            Sundanese Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Swahili">
+            <summary>
+            Swahili Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Swedish">
+            <summary>
+            Swedish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Tajik">
+            <summary>
+            Tajik Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Tamil">
+            <summary>
+            Tamil Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Telugu">
+            <summary>
+            Telugu Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Thai">
+            <summary>
+            Thai Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Turkish">
+            <summary>
+            Turkish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Ukrainian">
+            <summary>
+            Ukrainian Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Urdu">
+            <summary>
+            Urdu Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Uzbek">
+            <summary>
+            Uzbek Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Vietnamese">
+            <summary>
+            Vietnamese Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Welsh">
+            <summary>
+            Welsh Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Xhosa">
+            <summary>
+            Xhosa Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Yiddish">
+            <summary>
+            Yiddish Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Yoruba">
+            <summary>
+            Yoruba Language
+            </summary>
+        </member>
+        <member name="P:GoogleTranslateAPI.Language.Zulu">
+            <summary>
+            Zulu Language
+            </summary>
+        </member>
+    </members>
+</doc>
