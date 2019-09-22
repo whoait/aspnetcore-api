@@ -64,7 +64,10 @@ namespace AspNetCore.Modules.BCM.Controllers
                     result.OriginalTextTranscription,
                     result.FragmentedTranslation,
                     result.MergedTranslation,
-                    result.ExtraTranslations
+                    result.ExtraTranslations,
+                    result.Synonyms,
+                    result.Examples,
+                    result.SeeAlso,
                 }
             };
 

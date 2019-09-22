@@ -96,7 +96,7 @@ namespace AspNetCore.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/dev/swagger/v1/swagger.json", "ASP.NET Core Web API");
+                c.SwaggerEndpoint("/english/swagger/v1/swagger.json", "ASP.NET Core Web API");
                 //c.RoutePrefix = string.Empty;
             });
 
